@@ -1,0 +1,267 @@
+{
+	"info": {
+		"_postman_id": "c623d61b-1acb-4361-92b2-b0903fe2b41b",
+		"name": "BlogApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31158988",
+		"_collection_link": "https://sde111.postman.co/workspace/My-Workspace~8956f97d-f256-4070-802b-2514e741a47d/collection/31158988-c623d61b-1acb-4361-92b2-b0903fe2b41b?action=share&source=collection_link&creator=31158988"
+	},
+	"item": [
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "addPost",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\":\"nice blog 2\",\n    \"name\": \"sandip's blog 2\",\n    \"author_id\":\"author2\",\n    \"author_name\":\"bisal2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Baseurl}}/posts/add",
+							"host": [
+								"{{Baseurl}}"
+							],
+							"path": [
+								"posts",
+								"add"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "createBlog",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\":\"nice blog 2\",\n    \"name\": \"sandip's blog 2\",\n    \"author_id\":\"author2\",\n    \"author_name\":\"bisal2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Baseurl}}/blogs/add",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"blogs",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EditById",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\":\"edited 202245\",\n    \"name\": \"sandip's blog 20224\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Baseurl}}/blogs/update/202",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"blogs",
+						"update",
+						"202"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllBlogs",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{Baseurl}}/blogs/all",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"blogs",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllBlogsOwned",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{Baseurl}}/blogs/all",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"blogs",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllBlogById",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{Baseurl}}/blogs/id/2",
+					"host": [
+						"{{Baseurl}}"
+					],
+					"path": [
+						"blogs",
+						"id",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LogIn(GetToken)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();",
+							"pm.collectionVariables.set('TOKEN', response.access_token);",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "// {\n//   \"password\": \"MYPASS\",\n//   \"email_id\": \"sandipbera35@outlook.com\"\n// }\n\n{\n  \"password\": \"admin\",\n  \"email_id\": \"admin@admin.admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{auth}}/login",
+					"host": [
+						"{{auth}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "auth",
+			"value": "localhost:8091/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "TOKEN",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZjk3MWZmYjAtMWE4Ni00MTUxLThkNDUtY2M5YTVkZTEzMTM3IiwiRmluZF9uYW1lIjoiQWRtaW4iLCJsYXN0X25hbWUiOiJBZG1pbiIsImdlbmRlciI6IiIsInVzZXJfbmFtZSI6ImFkbWluIiwicHJvZmlsZV9pbWFnZSI6bnVsbCwiY292ZXJfaW1hZ2UiOm51bGwsImV4cCI6MTczNDMyMDkyMiwiaWF0IjoxNzM0MzE3MzIyfQ.JC85i41EZZ0EuKAPmV562xQIIerWT4aCUA8nEJ8BgDw"
+		},
+		{
+			"key": "Baseurl",
+			"value": "localhost:8080",
+			"type": "string"
+		}
+	]
+}
