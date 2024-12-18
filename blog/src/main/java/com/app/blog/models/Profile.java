@@ -1,12 +1,13 @@
 package com.app.blog.models;
 
+import java.util.Objects;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import java.util.Objects;
 
 @Component
 @Scope("prototype")
-public class BlogUser {
+public class Profile {
     
     private String id;
     private String first_name;
@@ -14,10 +15,10 @@ public class BlogUser {
     private String email_id;
 
 
-    public BlogUser() {
+    public Profile() {
     }
 
-    public BlogUser(String id, String first_name, String last_name, String email_id) {
+    public Profile(String id, String first_name, String last_name, String email_id) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -56,22 +57,22 @@ public class BlogUser {
         this.email_id = email_id;
     }
 
-    public BlogUser id(String id) {
+    public Profile id(String id) {
         setId(id);
         return this;
     }
 
-    public BlogUser first_name(String first_name) {
+    public Profile first_name(String first_name) {
         setFirst_name(first_name);
         return this;
     }
 
-    public BlogUser last_name(String last_name) {
+    public Profile last_name(String last_name) {
         setLast_name(last_name);
         return this;
     }
 
-    public BlogUser email_id(String email_id) {
+    public Profile email_id(String email_id) {
         setEmail_id(email_id);
         return this;
     }
@@ -80,11 +81,11 @@ public class BlogUser {
     public boolean equals(Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof BlogUser)) {
+        if (!(o instanceof Profile)) {
             return false;
         }
-        BlogUser blogUser = (BlogUser) o;
-        return Objects.equals(id, blogUser.id) && Objects.equals(first_name, blogUser.first_name) && Objects.equals(last_name, blogUser.last_name) && Objects.equals(email_id, blogUser.email_id);
+        Profile profile = (Profile) o;
+        return Objects.equals(id, profile.id) && Objects.equals(first_name, profile.first_name) && Objects.equals(last_name, profile.last_name) && Objects.equals(email_id, profile.email_id);
     }
 
     @Override
@@ -92,7 +93,7 @@ public class BlogUser {
         return Objects.hash(id, first_name, last_name, email_id);
     }
 
-    public BlogUser getObject() {
+    public Profile getObject() {
         
 
         return this;

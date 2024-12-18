@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.blog.authenticator.AuthRequest;
-import com.app.blog.models.BlogUser;
+import com.app.blog.models.Profile;
 import com.app.blog.services.BlogServices;
 import com.app.blog.tables.Blog;
 
@@ -40,7 +40,7 @@ public class BlogControllers {
         if (token.length() == 0) {
             return new ResponseEntity<>(blg, HttpStatus.valueOf(401));
         }
-        if (!auth.verifyToken(token)) {
+        if (auth.verifyToken(token)) {
             return new ResponseEntity<>(blg, HttpStatus.valueOf(401));
         }
 
@@ -59,7 +59,7 @@ public class BlogControllers {
         if (token.length() == 0) {
             return new ResponseEntity<>(blg, HttpStatus.valueOf(401));
         }
-        if (!auth.verifyToken(token.toString())) {
+        if (auth.verifyToken(token.toString())) {
             return new ResponseEntity<>(blg, HttpStatus.valueOf(401));
         }
 
@@ -95,10 +95,10 @@ public class BlogControllers {
             if (token.length() == 0) {
                 return new ResponseEntity<>(null, HttpStatus.valueOf(401));
             }
-            if (!auth.verifyToken(token)) {
+            if (auth.verifyToken(token)) {
                 return new ResponseEntity<>(null, HttpStatus.valueOf(401));
             }
-            BlogUser user = auth.getProfile(token);
+            Profile user = auth.getProfile(token);
             if (user == null) {
                 return new ResponseEntity<>(null, HttpStatus.valueOf(401));
             }
@@ -126,10 +126,10 @@ public class BlogControllers {
             if (token.length() == 0) {
                 return new ResponseEntity<>(null, HttpStatus.valueOf(401));
             }
-            if (!auth.verifyToken(token)) {
+            if (auth.verifyToken(token)) {
                 return new ResponseEntity<>(null, HttpStatus.valueOf(401));
             }
-            BlogUser user = auth.getProfile(token);
+            Profile user = auth.getProfile(token);
             if (user == null) {
                 return new ResponseEntity<>(null, HttpStatus.valueOf(401));
             }

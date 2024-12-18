@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import com.app.blog.models.BlogUser;
+import com.app.blog.models.Profile;
 
 import reactor.core.publisher.Mono;
 
@@ -21,42 +21,42 @@ public class AuthRequest {
 
         try {
 
-            Mono<BlogUser> response = authConfig.webClient().get()
+            Mono<Profile> response = authConfig.webClient().get()
 
                     .uri("/profile")
                     .header("Authorization", token, null)
                     .retrieve()
-
-                    .bodyToMono(BlogUser.class);
+                    .bodyToMono(Profile.class);
 
             if (response.block() != null) {
-                BlogUser user = response.block();
-                System.out.println("User : " + user.toString());
+                Profile user = response.block();
+                System.out.println("User : " + user);
                 return true;
-            } else {
-                return false;
             }
+            return false;
+
 
         } catch (Exception e) {
-            System.out.println("Error In Authencating request : " + e);
+            System.out.println("Error In Authenticating request : " + e);
             return false;
         }
+
     }
 
-    public BlogUser getProfile(String token) {
+    public Profile getProfile(String token) {
 
         try {
 
-            Mono<BlogUser> response = authConfig.webClient().get()
+            Mono<Profile> response = authConfig.webClient().get()
 
                     .uri("/profile")
                     .header("Authorization", token, null)
                     .retrieve()
 
-                    .bodyToMono(BlogUser.class);
+                    .bodyToMono(Profile.class);
 
             if (response.block() != null) {
-                BlogUser user = response.block();
+                Profile user = response.block();
                 System.out.println("User : " + user);
                 return user;
             } else {

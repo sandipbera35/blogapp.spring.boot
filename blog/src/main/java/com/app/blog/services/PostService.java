@@ -18,10 +18,21 @@ public class PostService {
         return postRepo.save(post);
     }
     public void deletePost(long id) {
-        postRepo.deleteById(id);
+        try {
+            postRepo.deleteById(id);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
     public Posts getPostById(long id) {
-        return postRepo.findById(id).get();
+
+        if (postRepo.findById(id).isPresent()){
+            return postRepo.findById(id).get();
+        }
+        return null;
+
     }
     public Iterable<Posts> getAllPost() {
         return postRepo.findAll();

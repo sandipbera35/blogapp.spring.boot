@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "c623d61b-1acb-4361-92b2-b0903fe2b41b",
+		"_postman_id": "b8e8406c-156b-4095-94cf-afd8369f2ae5",
 		"name": "BlogApi",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "31158988",
-		"_collection_link": "https://sde111.postman.co/workspace/My-Workspace~8956f97d-f256-4070-802b-2514e741a47d/collection/31158988-c623d61b-1acb-4361-92b2-b0903fe2b41b?action=share&source=collection_link&creator=31158988"
+		"_collection_link": "https://sde111.postman.co/workspace/My-Workspace~8956f97d-f256-4070-802b-2514e741a47d/collection/31158988-b8e8406c-156b-4095-94cf-afd8369f2ae5?action=share&source=collection_link&creator=31158988"
 	},
 	"item": [
 		{
@@ -31,13 +31,86 @@
 							}
 						},
 						"url": {
-							"raw": "{{Baseurl}}/posts/add",
+							"raw": "{{Baseurl}}/posts/add/blogid/2",
 							"host": [
 								"{{Baseurl}}"
 							],
 							"path": [
 								"posts",
-								"add"
+								"add",
+								"blogid",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPostById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\":\"nice blog 2\",\n    \"name\": \"sandip's blog 2\",\n    \"author_id\":\"author2\",\n    \"author_name\":\"bisal2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Baseurl}}/posts/id/1",
+							"host": [
+								"{{Baseurl}}"
+							],
+							"path": [
+								"posts",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteostById",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\":\"nice blog 2\",\n    \"name\": \"sandip's blog 2\",\n    \"author_id\":\"author2\",\n    \"author_name\":\"bisal2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Baseurl}}/posts/id/2",
+							"host": [
+								"{{Baseurl}}"
+							],
+							"path": [
+								"posts",
+								"id",
+								"2"
 							]
 						}
 					},
@@ -148,13 +221,14 @@
 					}
 				],
 				"url": {
-					"raw": "{{Baseurl}}/blogs/all",
+					"raw": "{{Baseurl}}/blogs/all/owned",
 					"host": [
 						"{{Baseurl}}"
 					],
 					"path": [
 						"blogs",
-						"all"
+						"all",
+						"owned"
 					]
 				}
 			},
