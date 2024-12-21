@@ -51,6 +51,18 @@ public class PostService {
         return postRepo.findAll();
     }
 
+    @Transactional
+   public void updatePostImage(String image, long id) {
+        try {
+            postRepo.updatePostImage(image, id);
+        } catch (Exception e) {
+
+            System.out.println("Exception in repo: " + e);
+            throw new RuntimeException(e);
+
+        }
+
+   }
     public List<Posts> getAllPostByBlogId(long blog_id) {return postRepo.findAllByBlog_id(blog_id); }
     
 }

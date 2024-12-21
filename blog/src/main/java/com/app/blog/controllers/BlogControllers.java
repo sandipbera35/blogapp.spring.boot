@@ -37,7 +37,7 @@ public class BlogControllers {
         List<Blog> blg = null;
         String token = request.getHeader("Authorization");
         System.out.println("token data : " + token);
-        if (token.length() == 0) {
+        if (token.isEmpty()) {
             return new ResponseEntity<>(blg, HttpStatus.valueOf(401));
         }
         if (auth.verifyToken(token)) {

@@ -11,6 +11,78 @@
 			"name": "Posts",
 			"item": [
 				{
+					"name": "Images",
+					"item": [
+						{
+							"name": "AddImageToPOst",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/Users/sandeepbera/Pictures/459251936_2268785836814913_3480065850436193682_n.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{Baseurl}}/images/post/add/252",
+									"host": [
+										"{{Baseurl}}"
+									],
+									"path": [
+										"images",
+										"post",
+										"add",
+										"252"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetImage",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Baseurl}}/images/post/252?token={{TOKEN}}",
+									"host": [
+										"{{Baseurl}}"
+									],
+									"path": [
+										"images",
+										"post",
+										"252"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "addPost",
 					"request": {
 						"method": "POST",

@@ -56,9 +56,8 @@ public class AuthRequest {
                     .bodyToMono(Profile.class);
 
             if (response.block() != null) {
-                Profile user = response.block();
-//                System.out.println("User : " + user);
-                return user;
+                //                System.out.println("User : " + user);
+                return response.block();
             } else {
                 return null;
             }

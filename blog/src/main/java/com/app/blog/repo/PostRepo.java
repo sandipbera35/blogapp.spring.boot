@@ -18,4 +18,8 @@ public interface  PostRepo extends JpaRepository<Posts, Long> {
      @Modifying
      @Query("UPDATE Posts p set p.name = :name, p.description = :description, p.updated_at = now() WHERE p.id = :id")
      void updatePost(@Param("name") String name,@Param("description") String description, @Param("id") long id);;
+
+     @Modifying
+     @Query("UPDATE Posts p set p.image = :image, p.updated_at = now() WHERE p.id = :id")
+     void updatePostImage(@Param("image") String image, @Param("id") long id);;
 }
