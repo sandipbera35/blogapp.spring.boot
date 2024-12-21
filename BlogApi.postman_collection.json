@@ -23,7 +23,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"description\":\"nice blog 2\",\n    \"name\": \"sandip's blog 2\",\n    \"author_id\":\"author2\",\n    \"author_name\":\"bisal2\"\n}",
+							"raw": "{\n    \"description\":\"nice blog 2\",\n    \"name\": \"sandip's blog 2\"\n\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -40,6 +40,40 @@
 								"add",
 								"blogid",
 								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update post",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\":\"nice blog 2 updated\",\n    \"name\": \"sandip's blog 2 updated\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Baseurl}}/posts/update/53",
+							"host": [
+								"{{Baseurl}}"
+							],
+							"path": [
+								"posts",
+								"update",
+								"53"
 							]
 						}
 					},
@@ -69,14 +103,88 @@
 							}
 						},
 						"url": {
-							"raw": "{{Baseurl}}/posts/id/1",
+							"raw": "{{Baseurl}}/posts/id/53",
 							"host": [
 								"{{Baseurl}}"
 							],
 							"path": [
 								"posts",
 								"id",
-								"1"
+								"53"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getallPosts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\":\"nice blog 2\",\n    \"name\": \"sandip's blog 2\",\n    \"author_id\":\"author2\",\n    \"author_name\":\"bisal2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Baseurl}}/posts/list",
+							"host": [
+								"{{Baseurl}}"
+							],
+							"path": [
+								"posts",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getallPosts ByBlogId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\":\"nice blog 2\",\n    \"name\": \"sandip's blog 2\",\n    \"author_id\":\"author2\",\n    \"author_name\":\"bisal2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Baseurl}}/posts/list/blogid/2",
+							"host": [
+								"{{Baseurl}}"
+							],
+							"path": [
+								"posts",
+								"list",
+								"blogid",
+								"2"
 							]
 						}
 					},
