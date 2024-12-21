@@ -9,7 +9,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class AuthConfig {
     
     @Bean
-    @Scope("prototype")
+//    @Scope("prototype")
     public WebClient webClient() {
         return WebClient.builder()
                 .baseUrl("http://localhost:8091/api/v1") // Replace with your API base URL

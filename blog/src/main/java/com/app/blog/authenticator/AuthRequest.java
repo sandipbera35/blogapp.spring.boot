@@ -9,7 +9,7 @@ import com.app.blog.models.Profile;
 import reactor.core.publisher.Mono;
 
 @Service
-@Scope("prototype")
+//@Scope("prototype")
 public class AuthRequest {
 
     @Autowired
@@ -57,7 +57,7 @@ public class AuthRequest {
 
             if (response.block() != null) {
                 Profile user = response.block();
-                System.out.println("User : " + user);
+//                System.out.println("User : " + user);
                 return user;
             } else {
                 return null;

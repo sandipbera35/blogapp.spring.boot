@@ -1,10 +1,13 @@
 package com.app.blog.services;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.blog.repo.PostRepo;
 import com.app.blog.tables.Posts;
+
+import java.util.List;
 
 @Service
 public class PostService {
@@ -12,15 +15,25 @@ public class PostService {
     private PostRepo postRepo;
 
     public Posts createPost(Posts post) {
+
+        post.created_at(new java.util.Date());
+        post.updated_at(new java.util.Date());
         return postRepo.save(post);
     }
-    public Posts updatePost(Posts post) {
-        return postRepo.save(post);
+    @Transactional
+    public void updatePost(Posts post, long id) {
+        try {
+           postRepo.updatePost(post.getName(), post.getDescription(), id);
+
+        } catch (Exception e) {
+            System.out.println("Exception : " + e);
+            throw new InternalError(e);
+        }
+
     }
     public void deletePost(long id) {
         try {
             postRepo.deleteById(id);
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -37,5 +50,7 @@ public class PostService {
     public Iterable<Posts> getAllPost() {
         return postRepo.findAll();
     }
+
+    public List<Posts> getAllPostByBlogId(long blog_id) {return postRepo.findAllByBlog_id(blog_id); }
     
 }

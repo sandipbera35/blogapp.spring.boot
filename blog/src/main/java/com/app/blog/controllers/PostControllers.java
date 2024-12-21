@@ -21,10 +21,12 @@ public class PostControllers {
     private PostService postService;
     @Autowired
     private AuthRequest auth;
+
+
     
     @PostMapping("/add/blogid/{id}")
     public ResponseEntity<Posts>  createPost(@RequestHeader("Authorization") String token,@PathVariable long id, @RequestBody Posts entity) {
-        //TODO: process POST request
+
         Profile profile = auth.getProfile(token);
         System.out.println("Profile : " + profile);
         if(profile == null) {
@@ -33,6 +35,10 @@ public class PostControllers {
         }
         System.out.println(entity);
         entity.setBlog_id(id);
+        entity.setAuthor_id(profile.getId());
+        entity.setAuthor_name(profile.getFirst_name() + " " +  profile.getLast_name());
+        entity.setCreated_at(new java.util.Date());
+        entity.setUpdated_at(new java.util.Date());
         Posts post = postService.createPost(entity);
 
         if(post == null) {
@@ -84,6 +90,53 @@ public class PostControllers {
             return ResponseEntity.internalServerError().build();
         }
         return ResponseEntity.ok("Post deleted successfully");
+
+    }
+    @PatchMapping("/update/{id}")
+    public  ResponseEntity<String> updatePost(@RequestHeader("Authorization") String token,@PathVariable long id, @RequestBody Posts entity) {
+
+        try{
+            Profile profile = auth.getProfile(token);
+            if(profile == null) {
+                return new  ResponseEntity<>(null, HttpStatus.valueOf(HttpStatus.UNAUTHORIZED.value()));
+            }
+
+            Posts post = postService.getPostById(id);
+            if (post == null) {
+                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            }
+//            System.out.println("entity : " + entity);
+
+
+            postService.updatePost(entity, id);
+
+           return new ResponseEntity<>("PostUpdated successfully", HttpStatus.OK);
+
+        } catch (Exception e) {
+            System.out.println("Exception In Update Controller: " + e);
+            return  new ResponseEntity<>(null, HttpStatus.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()));
+        }
+
+    }
+
+    @GetMapping("/list/blogid/{id}")
+    public ResponseEntity<List<Posts>> getAllPostByBlogId(@RequestHeader("Authorization") String token,@PathVariable long id){
+        Profile profile = auth.getProfile(token);
+        if(profile == null) {
+            return  ResponseEntity.badRequest().build();
+
+        }
+        try {
+            List<Posts> posts =  postService.getAllPostByBlogId(id);
+            return  ResponseEntity.ok(posts);
+        }
+        catch (Exception e) {
+            System.out.println("Exception : " + e);
+            return  new ResponseEntity<>(null, HttpStatus.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()));
+        }
+
+
+
 
     }
 }
