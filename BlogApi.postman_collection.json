@@ -14,7 +14,7 @@
 					"name": "Images",
 					"item": [
 						{
-							"name": "AddImageToPOst",
+							"name": "AddUpdateImageToPOst",
 							"request": {
 								"method": "POST",
 								"header": [
@@ -30,7 +30,7 @@
 										{
 											"key": "image",
 											"type": "file",
-											"src": "/Users/sandeepbera/Pictures/459251936_2268785836814913_3480065850436193682_n.jpg"
+											"src": "/Users/sandeepbera/Pictures/sandipberapic.jpeg"
 										}
 									]
 								},
@@ -61,7 +61,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{Baseurl}}/images/post/252?token={{TOKEN}}",
+									"raw": "{{Baseurl}}/images/post/252",
 									"host": [
 										"{{Baseurl}}"
 									],
@@ -73,7 +73,40 @@
 									"query": [
 										{
 											"key": "token",
-											"value": "{{TOKEN}}"
+											"value": "{{TOKEN}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove Image",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Baseurl}}/images/post/252",
+									"host": [
+										"{{Baseurl}}"
+									],
+									"path": [
+										"images",
+										"post",
+										"252"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"disabled": true
 										}
 									]
 								}

@@ -1,13 +1,17 @@
 package com.app.blog.minio;
 
-import io.minio.*;
+import java.io.InputStream;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Objects;
-import java.util.stream.Stream;
+import io.minio.BucketExistsArgs;
+import io.minio.GetObjectArgs;
+import io.minio.MakeBucketArgs;
+import io.minio.MinioClient;
+import io.minio.PutObjectArgs;
+import io.minio.RemoveObjectArgs;
+
 
 @Service
 public class MinioRequest {
@@ -32,10 +36,15 @@ public class MinioRequest {
             throw new RuntimeException("Error occurred: " + e.getMessage());
         }
     }
-    public GetObjectResponse downloadFile(String bucketName, String objectName) {
+    public InputStream downloadFile(String bucketName, String objectName) {
         try {
-            GetObjectArgs obj = GetObjectArgs.builder().bucket(bucketName).object(objectName).build();
-            return  minioClient.getObject(obj);
+            GetObjectArgs obj = GetObjectArgs.builder()
+            .bucket(bucketName)
+            .object(objectName)
+            .build();
+            InputStream inputStream = minioClient.getObject(obj);
+            return inputStream;
+    
 
         } catch (Exception e) {
             throw new RuntimeException("Error occurred: " + e.getMessage());
@@ -43,7 +52,11 @@ public class MinioRequest {
     }
     public void deleteFile(String bucketName, String objectName) {
         try {
-            minioClient.removeObject(RemoveObjectArgs.builder().bucket(bucketName).object(objectName).build());
+            RemoveObjectArgs args = RemoveObjectArgs.builder()
+            .bucket(bucketName)
+            .object(objectName)
+            .build();
+            minioClient.removeObject(args);
         } catch (Exception e) {
             throw new RuntimeException("Error occurred: " + e.getMessage());
         }

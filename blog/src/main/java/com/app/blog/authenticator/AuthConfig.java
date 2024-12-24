@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
+@Scope("prototype")
 public class AuthConfig {
     
     @Bean

@@ -59,7 +59,7 @@ public class BlogControllers {
         if (token.length() == 0) {
             return new ResponseEntity<>(blg, HttpStatus.valueOf(401));
         }
-        if (auth.verifyToken(token.toString())) {
+        if (auth.verifyToken(token)) {
             return new ResponseEntity<>(blg, HttpStatus.valueOf(401));
         }
 
