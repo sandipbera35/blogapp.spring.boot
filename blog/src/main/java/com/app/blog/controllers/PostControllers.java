@@ -61,7 +61,7 @@ public class PostControllers {
     }
     @GetMapping("/id/{id}")
     public ResponseEntity<Posts> getById(@PathVariable long id,@RequestHeader("Authorization") String token){
-        Profile profile = auth.getProfile(token);
+        var profile = auth.getProfile(token);
         if(profile == null) {
             return  ResponseEntity.badRequest().build();
         }

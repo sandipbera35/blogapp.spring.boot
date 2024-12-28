@@ -18,31 +18,28 @@ public class BlogServices {
     private BlogRepo blogRepo;
 
     public List<Blog> getAllBlog() {
-
         return blogRepo.findAll();
     }
-    public  Optional<Blog> getBlogById(long id ){
 
+    public  Optional<Blog> getBlogById(long id ){
         return blogRepo.findById(id);
     }
+
     public Blog createBlog(Blog blog){
-        
         blog.setCreated_at(Date.from(Instant.now()));
         blog.setUpdated_at(Date.from(Instant.now()));
         return blogRepo.save(blog);
     }
+
     public Blog updateBlog(Blog blog) {
-        
         return blogRepo.save(blog);
     }
+
     public List<Blog> getAllBlogByauthorId(String author_id) {
-
-
         return blogRepo.getAllBlogByAuthorId(author_id);
     }
 
     public int  updateBlogById(String name, String description, long id) {
-
         return blogRepo.updateBlog(id, name, description);
     }
 

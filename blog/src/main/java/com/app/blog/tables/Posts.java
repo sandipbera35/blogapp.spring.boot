@@ -1,18 +1,16 @@
 package com.app.blog.tables;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
 
 
 @Entity
 @Component
+@Table(name = "posts")
 public class Posts {
     @Id
     @GeneratedValue
@@ -39,8 +37,13 @@ public class Posts {
     @Column(name = "updated_at")
     private Date updated_at;
 
-    
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post_id")
+    private List<Comment> comments;
+
+    public List<Comment> getComments() {
+        return comments;
+    }
 
     public Posts() {
     }

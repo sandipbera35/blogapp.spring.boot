@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,36 +33,39 @@ public class BlogControllers {
     private AuthRequest auth;
 
     @GetMapping("/all")
-    public ResponseEntity<List<Blog>> getAllBlog(HttpServletRequest request) {
+    public ResponseEntity<List<Blog>> getAllBlog(@RequestHeader("Authorization") String token) {
 
-        List<Blog> blg = null;
-        String token = request.getHeader("Authorization");
+    
+    
         System.out.println("token data : " + token);
         if (token.isEmpty()) {
-            return new ResponseEntity<>(blg, HttpStatus.valueOf(401));
+            return new ResponseEntity<>(null, HttpStatus.valueOf(401));
         }
-        if (auth.verifyToken(token)) {
-            return new ResponseEntity<>(blg, HttpStatus.valueOf(401));
+       Profile user = auth.getProfile(token); 
+       if (user == null) {
+            return new ResponseEntity<>(null, HttpStatus.valueOf(401));
         }
 
-        blg = bs.getAllBlog();
+        List<Blog>  blg = bs.getAllBlog();
 
         return new ResponseEntity<>(blg, HttpStatus.valueOf(200));
 
     }
 
     @GetMapping("/all/owned")
-    public ResponseEntity<List<Blog>> getAllBlogOwned(HttpServletRequest request) {
+    public ResponseEntity<List<Blog>> getAllBlogOwned(@RequestHeader("Authorization") String token) {
 
         List<Blog> blg = null;
-        String token = request.getHeader("Authorization");
+
         System.out.println("token data : " + token);
         if (token.length() == 0) {
             return new ResponseEntity<>(blg, HttpStatus.valueOf(401));
         }
-        if (auth.verifyToken(token)) {
+        Profile user = auth.getProfile(token);
+        if (user == null) {
             return new ResponseEntity<>(blg, HttpStatus.valueOf(401));
         }
+     
 
         blg = bs.getAllBlogByauthorId(auth.getProfile(token).getId());
 
