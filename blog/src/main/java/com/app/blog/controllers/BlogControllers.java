@@ -99,9 +99,9 @@ public class BlogControllers {
             if (token.length() == 0) {
                 return new ResponseEntity<>(null, HttpStatus.valueOf(401));
             }
-            if (auth.verifyToken(token)) {
-                return new ResponseEntity<>(null, HttpStatus.valueOf(401));
-            }
+            // if (auth.verifyToken(token)) {
+            //     return new ResponseEntity<>(null, HttpStatus.valueOf(401));
+            // }
             Profile user = auth.getProfile(token);
             if (user == null) {
                 return new ResponseEntity<>(null, HttpStatus.valueOf(401));
